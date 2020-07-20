@@ -72,6 +72,7 @@ export default {
     &.\@--#{$i} {
       @extend %grid__item;
       flex: 0 0 col($i);
+      max-width: col($i);
     }
   }
 }
@@ -103,6 +104,7 @@ export default {
     @for $i from 1 through $columns {
       .l-grid__item.\@#{$breakpoint}--#{$i} {
         flex: 0 0 col($i);
+        min-width: col($i);
       }
     }
   }
