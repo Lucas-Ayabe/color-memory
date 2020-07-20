@@ -58,16 +58,41 @@ export default {
     CLoader,
     CButton
   },
+  data() {
+    return {
+      palletes: []
+    };
+  },
   computed: {
     isWaiting() {
       return this.$store.state.loading;
     },
-    palletes() {
+    statePalletes() {
       return this.$store.state.palletes;
+    },
+    search() {
+      return this.$store.state.searchText;
+    }
+  },
+  watch: {
+    search() {
+      const searchPalletes = ({ name }) => {
+        if (this.search !== "") {
+          return name.toLowerCase().includes(this.search.toLowerCase());
+        }
+
+        return true;
+      };
+
+      this.palletes = this.statePalletes.filter(searchPalletes);
     }
   },
   mounted() {
-    this.$store.dispatch("fetchPalletes", "../api.json");
+    new Promise(resolve => {
+      resolve(this.$store.dispatch("fetchPalletes", "../api.json"));
+    }).then(() => {
+      this.palletes = this.statePalletes;
+    });
   }
 };
 </script>

@@ -1,7 +1,13 @@
 <template>
-  <form @submit.prevent="onSubmit" class="search">
-    <input :placeholder="placeholder" type="text" class="search__input" />
-    <button class="search__button">
+  <form class="search">
+    <input
+      :value="value"
+      @input="$emit('input', $event.target.value)"
+      :placeholder="placeholder"
+      type="text"
+      class="search__input"
+    />
+    <button type="button" class="search__button">
       <img src="@/assets/search.svg" alt="" />
     </button>
   </form>
@@ -11,14 +17,13 @@
 export default {
   name: "CSearch",
   props: {
+    value: {
+      type: String,
+      default: ""
+    },
     placeholder: {
       type: String,
       default: "Search something..."
-    }
-  },
-  methods: {
-    onSubmit(event) {
-      this.$emit("submit", event);
     }
   }
 };
@@ -47,7 +52,7 @@ export default {
   }
 
   &__button {
-    cursor: pointer;
+    cursor: context-menu;
     background: transparent;
     border: 0 solid transparent;
     position: absolute;

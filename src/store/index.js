@@ -6,6 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    searchText: "",
     loading: false,
     apiLoaded: false,
     palletes: [
@@ -27,6 +28,9 @@ export default new Vuex.Store({
     ]
   },
   mutations: {
+    UPDATE_SEARCH_TEXT(state, payload) {
+      state.searchText = payload;
+    },
     UPDATE_PALLETES(state, payload) {
       state.palletes = payload;
     },
