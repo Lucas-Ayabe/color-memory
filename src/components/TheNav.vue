@@ -7,7 +7,7 @@
         <!-- <router-link class="nav__link" to="/create">New styleguide</router-link> -->
         <router-link class="nav__link" to="/create">New pallete</router-link>
       </nav>
-      <c-search class="navbar__search" />
+      <c-search v-model="search" class="navbar__search" />
     </l-container>
   </header>
 </template>
@@ -21,6 +21,16 @@ export default {
   components: {
     LContainer,
     CSearch
+  },
+  data() {
+    return {
+      search: ""
+    };
+  },
+  watch: {
+    search() {
+      this.$store.commit("UPDATE_SEARCH_TEXT", this.search);
+    }
   }
 };
 </script>
