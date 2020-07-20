@@ -64,7 +64,23 @@ export default {
       return this.$route.params.id;
     }
   },
+  watch: {
+    palleteId() {
+      this.initValues();
+    }
+  },
   methods: {
+    initValues() {
+      const loadPalletes = new Promise(resolve => {
+        resolve(this.$store.dispatch("fetchPalletes", "../api.json"));
+      });
+
+      loadPalletes.then(() => {
+        this.pallete = this.palletes.find(({ id }) => {
+          return +id === +this.palleteId;
+        });
+      });
+    },
     destroyPallete() {
       const palletes = this.palletes.filter(({ id }) => id !== this.pallete.id);
       this.$store.commit("UPDATE_PALLETES", palletes);
@@ -72,15 +88,7 @@ export default {
     }
   },
   mounted() {
-    const loadPalletes = new Promise(resolve => {
-      resolve(this.$store.dispatch("fetchPalletes", "../api.json"));
-    });
-
-    loadPalletes.then(() => {
-      this.pallete = this.palletes.find(({ id }) => {
-        return +id === +this.palleteId;
-      });
-    });
+    this.initValues();
   }
 };
 </script>

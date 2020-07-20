@@ -1,13 +1,21 @@
 <template>
-  <form class="search">
+  <form @submit.prevent="goToPallete" class="search">
     <input
       :value="value"
       @input="$emit('input', $event.target.value)"
       :placeholder="placeholder"
       type="text"
       class="search__input"
+      list="list_of_palletes"
     />
-    <button type="button" class="search__button">
+    <datalist id="list_of_palletes">
+      <option
+        v-for="(pallete, index) in palletes"
+        :key="index"
+        :value="pallete.name"
+      />
+    </datalist>
+    <button class="search__button">
       <img src="@/assets/search.svg" alt="" />
     </button>
   </form>
@@ -24,6 +32,50 @@ export default {
     placeholder: {
       type: String,
       default: "Search something..."
+    }
+  },
+  data() {
+    return {
+      palletes: []
+    };
+  },
+  methods: {
+    goToPallete() {
+      if (
+        this.value !== "" &&
+        this.$route.params &&
+        this.$route.params.id !== this.palleteId
+      ) {
+        this.$router.push({ name: "Pallete", params: { id: this.palleteId } });
+      }
+    }
+  },
+  computed: {
+    statePalletes() {
+      return this.$store.state.palletes;
+    },
+    palleteId() {
+      const selectedPallete = this.palletes.find(
+        pallete => pallete.name === this.value
+      );
+
+      return selectedPallete.id;
+    },
+    search() {
+      return this.$store.state.searchText;
+    }
+  },
+  watch: {
+    search() {
+      const searchPalletes = ({ name }) => {
+        if (this.search !== "") {
+          return name.toLowerCase().includes(this.search.toLowerCase());
+        }
+
+        return true;
+      };
+
+      this.palletes = this.statePalletes.filter(searchPalletes);
     }
   }
 };
