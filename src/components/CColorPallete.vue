@@ -1,29 +1,24 @@
 <template>
   <div class="c-color-pallete">
-    <span
+    <c-color-pallete-color
       v-for="(color, index) in colors"
       :key="index"
-      :style="{ background: color, color: yiqContrast(color) }"
-      class="c-color-pallete__color"
-    >
-      {{ color }}
-    </span>
+      :color="color"
+    />
   </div>
 </template>
 
 <script>
-import yiqContrast from "@/helpers/yiqContrast";
+import CColorPalleteColor from "@/components/CColorPalleteColor";
 export default {
   name: "CColorPallete",
+  components: {
+    CColorPalleteColor
+  },
   props: {
     colors: {
       type: Array,
       default: () => []
-    }
-  },
-  methods: {
-    yiqContrast(color) {
-      return yiqContrast(color);
     }
   }
 };
@@ -35,6 +30,9 @@ export default {
   border: 1px solid #ddd;
 
   &__color {
+    border: 0 solid transparent;
+    font-family: $family;
+    font-size: 1rem;
     text-align: center;
     flex: 1;
     overflow: hidden;
