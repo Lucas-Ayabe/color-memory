@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "RGB",
+    "description": "A RGB based colors.",
+    "colors": ["#ff0000", "#00ff00", "#0000ff"]
+  },
+  {
+    "id": 2,
+    "name": "CMKY",
+    "description": "A CMKY based colors, has the 4 pure colors.",
+    "colors": ["#00aaff", "#ff00d4", "#000000", "#ffff00"]
+  },
+  {
+    "id": 3,
+    "name": "Tons of blue",
+    "description": "Monochromatic pallete that is a set of shades of blue.",
+    "colors": ["#001999", "#0044cc", "#0080ff", "#3d99f5", "#75b3f0"]
+  },
+  {
+    "id": 4,
+    "name": "Tons of red",
+    "description": "Monochromatic pallete that is a set of shades of red.",
+    "colors": ["#990000", "#cc0000", "#ff0000", "#ff3333"]
+  }
+]
