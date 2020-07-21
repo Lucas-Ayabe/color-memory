@@ -7,7 +7,7 @@ export const fetchData = async function(url) {
         setTimeout(async () => {
           data = await (await fetch(url)).json();
           resolve(data);
-        }, 1000);
+        }, 0);
       });
     };
 
